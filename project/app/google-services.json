@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "554383661443",
+    "project_id": "mathproject-bc9f5",
+    "storage_bucket": "mathproject-bc9f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554383661443:android:ec175e60d9aea67e523eb6",
+        "android_client_info": {
+          "package_name": "com.math.watermelon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554383661443-oga2p2jhlo7au4dov4kh6qbbo0ptka2n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJCrGN2Gnto2W024sqXwsJbNhTwfv7Y_4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554383661443-oga2p2jhlo7au4dov4kh6qbbo0ptka2n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

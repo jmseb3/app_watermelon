@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/wood" />
+
+        <Button
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/ic_baseline_search_24"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_centerInParent="true"
+            android:id="@+id/search"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/title_area"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/thisfont"
+                android:text="시원한 개념정리"
+                android:textColor="@color/maintoptextcolor"
+                android:textSize="40sp" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/main2" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:background="#60ffffff"
+            android:imeOptions="actionSearch"
+            android:visibility="gone"
+            android:focusable="true"
+            android:fontFamily="@font/thisfont"
+            android:hint="검색할 내용을 입력해주세요"
+            android:id="@+id/searchtext"/>
+
+        <LinearLayout
+            android:layout_below="@+id/searchtext"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btnmath1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="7.5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="7.5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_layout"
+                    android:fontFamily="@font/thisfont"
+                    android:text="수학1"
+                    android:textColor="@color/btn_color"
+                    android:textSize="30dp" />
+
+                <Button
+                    android:id="@+id/btnmath2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="7.5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="7.5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_layout"
+                    android:fontFamily="@font/thisfont"
+                    android:text="수학2"
+                    android:textColor="@color/btn_color"
+                    android:textSize="30dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btncalculus"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="7.5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="7.5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_layout"
+                    android:fontFamily="@font/thisfont"
+                    android:text="미적분"
+                    android:textColor="@color/btn_color"
+                    android:textSize="30dp" />
+
+                <Button
+                    android:id="@+id/btnrate"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="7.5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="7.5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_layout"
+                    android:fontFamily="@font/thisfont"
+                    android:text="확률과 통계"
+                    android:textColor="@color/btn_color"
+                    android:textSize="30dp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

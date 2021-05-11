@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/wood" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/thisfont"
+                android:text="기타"
+                android:textColor="@color/maintoptextcolor"
+                android:textSize="40sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        // 메인이미지
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/main2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/app_rate"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/btn_layout"
+                android:fontFamily="@font/thisfont"
+                android:text="평가하기"
+                android:textSize="25sp" />
+            <!--                <Button-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="match_parent"-->
+            <!--                    android:layout_weight="1"-->
+            <!--                    android:layout_margin="8dp"-->
+            <!--                    android:textSize="30dp"-->
+            <!--                    android:text="뭐넣지"-->
+            <!--                    android:fontFamily="@font/maple"-->
+            <!--                    android:background="@drawable/btn_layout"/>-->
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/make_person"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_above="@+id/helpPerson"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/btn_layout"
+            android:fontFamily="@font/thisfont"
+            android:text="만든 사람들"
+            android:textSize="25sp" />
+
+
+        <Button
+            android:id="@+id/helpPerson"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/btn_layout"
+            android:fontFamily="@font/thisfont"
+            android:text="도움을 주신분"
+            android:textSize="25sp" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>
