@@ -26,24 +26,12 @@ class etcFragment : Fragment() {
     ): View? {
         binding = FragmentEtcBinding.inflate(inflater, container, false)
 
-        val manager = ReviewManagerFactory.create(requireContext())
-        val request = manager.requestReviewFlow()
-
-
         binding.helpPerson.setOnClickListener {
             parentFragmentManager
                 .beginTransaction()
                 .addToBackStack(null)
                 .add(R.id.fragcontainer, HelpPeopleFragment())
                 .commit()
-        }
-
-        binding.makePerson.setOnClickListener {
-            parentFragmentManager
-                    .beginTransaction()
-                    .addToBackStack(null)
-                    .add(R.id.fragcontainer, MakePeopleFragment())
-                    .commit()
         }
 
         binding.appRate.setOnClickListener {
