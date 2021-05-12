@@ -32,8 +32,8 @@ class DetailcheckFragment : Fragment() {
     private lateinit var binding: FragmentDetailcheckBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDetailcheckBinding.inflate(inflater, container, false)
 
@@ -50,38 +50,38 @@ class DetailcheckFragment : Fragment() {
 
         }
         GlobalScope.launch(Dispatchers.IO) {
-            var nowdata =db.DataDao().getmathdatabyid(iddata)
-            GlobalScope.launch(Dispatchers.Main) {
+            var nowdata = db.DataDao().getmathdatabyid(iddata)
+            launch(Dispatchers.Main) {
                 anscheck(nowdata.ans)
                 Glide.with(requireActivity())
-                    .load(nowdata.qimgsrc+"Q"+nowdata.imgsrcend)
-                    .placeholder(R.drawable.loading)
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                    .into(binding.detailimg)
+                        .load(nowdata.qimgsrc + "Q" + nowdata.imgsrcend)
+                        .placeholder(R.drawable.loading)
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                        .into(binding.detailimg)
 
                 Glide.with(requireActivity())
-                    .load(nowdata.qimgsrc+"A1"+nowdata.imgsrcend)
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                    .fitCenter()
-                    .into(binding.ans1img)
+                        .load(nowdata.qimgsrc + "A1" + nowdata.imgsrcend)
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                        .fitCenter()
+                        .into(binding.ans1img)
 
                 Glide.with(requireActivity())
-                    .load(nowdata.qimgsrc+"A2"+nowdata.imgsrcend)
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                    .fitCenter()
-                    .into(binding.ans2img)
+                        .load(nowdata.qimgsrc + "A2" + nowdata.imgsrcend)
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                        .fitCenter()
+                        .into(binding.ans2img)
 
                 Glide.with(requireActivity())
-                    .load(nowdata.qimgsrc+"A3"+nowdata.imgsrcend)
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                    .fitCenter()
-                    .into(binding.ans3img)
+                        .load(nowdata.qimgsrc + "A3" + nowdata.imgsrcend)
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                        .fitCenter()
+                        .into(binding.ans3img)
 
                 Glide.with(requireActivity())
-                    .load(nowdata.qimgsrc+"A4"+nowdata.imgsrcend)
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                    .fitCenter()
-                    .into(binding.ans4img)
+                        .load(nowdata.qimgsrc + "A4" + nowdata.imgsrcend)
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                        .fitCenter()
+                        .into(binding.ans4img)
             }
 
         }
@@ -181,7 +181,8 @@ class DetailcheckFragment : Fragment() {
             dialog.show()
             successsnd.start()
         }
-        fun failshow(){
+
+        fun failshow() {
             dialog.setContentView(R.layout.dialog_fail)
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.setCanceledOnTouchOutside(true)

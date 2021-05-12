@@ -39,14 +39,11 @@ class conceptFragment : Fragment() {
             change("미적분")
         }
 
-        var check = false
         binding.search.setOnClickListener {
-            if (!check) {
-                check = true
+            if (binding.searchtext.visibility == View.GONE) {
                 binding.searchtext.visibility = View.VISIBLE
                 binding.searchtext.requestFocus()
             } else {
-                check = false
                 binding.searchtext.visibility = View.GONE
                 binding.searchtext.setText("")
                 mainActivity!!.hideKeyboard(binding.searchtext)
@@ -66,7 +63,6 @@ class conceptFragment : Fragment() {
                             }
                         }).commit()
                 binding.searchtext.setText("")
-                check = false
                 binding.searchtext.visibility = View.GONE
                 mainActivity!!.hideKeyboard(binding.searchtext)
             }

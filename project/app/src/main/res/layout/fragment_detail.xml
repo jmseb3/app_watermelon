@@ -17,42 +17,40 @@
             android:src="@drawable/wood" />
 
         <LinearLayout
-            android:padding="8dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:padding="8dp">
 
             <ImageView
                 android:id="@+id/detailback"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/backbtn"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:src="@drawable/backbtn" />
 
             <ImageView
-                android:layout_marginLeft="20dp"
+                android:id="@+id/detailfavorite"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_baseline_favorite_border_24"
-                android:id="@+id/detailfavorite" />
-
-
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ic_baseline_favorite_border_24" />
 
 
         </LinearLayout>
 
         <LinearLayout
-            android:padding="8dp"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="right"
-            android:layout_height="match_parent">
+            android:padding="8dp">
 
             <ImageView
-                android:layout_marginRight="20dp"
+                android:id="@+id/detailcheck"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/ic_check"
-                android:id="@+id/detailcheck" />
+                android:layout_marginRight="20dp"
+                android:background="@drawable/ic_check" />
 
             <ImageView
                 android:id="@+id/detaihome"
@@ -62,7 +60,6 @@
                 android:gravity="center_vertical" />
 
         </LinearLayout>
-
 
 
     </RelativeLayout>
@@ -87,6 +84,23 @@
             android:background="#80ffffff">
 
         </com.github.chrisbanes.photoview.PhotoView>
+
+        <ImageView
+            android:id="@+id/forward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/ic_baseline_arrow_right_24" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_arrow_left_24" />
 
 
     </RelativeLayout>
