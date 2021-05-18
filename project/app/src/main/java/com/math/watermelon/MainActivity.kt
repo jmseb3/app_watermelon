@@ -26,7 +26,8 @@ import com.math.watermelon.room.AppDatabase
 class MainActivity : AppCompatActivity() {
 
     private val fragmentOne by lazy { conceptFragment() }
-    private val fragmentThree by lazy { etcFragment() }
+    private val fragmentThree by lazy { TestFragment() }
+    private val fragmentFour by lazy { etcFragment() }
     private val fragmentTwo by lazy { FavoriteFragment() }
     private var backKeyPressedTime: Long = 0
 
@@ -134,8 +135,11 @@ class MainActivity : AppCompatActivity() {
                     R.id.nav_favorite -> {
                         changeFragment(fragmentTwo)
                     }
-                    R.id.nav_etc ->
+                    R.id.nav_test -> {
                         changeFragment(fragmentThree)
+                    }
+                    R.id.nav_etc ->
+                        changeFragment(fragmentFour)
                 }
                 true
             }

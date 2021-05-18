@@ -14,7 +14,7 @@ import com.math.watermelon.room.AppDatabase
 
 class conceptFragment : Fragment() {
 
-    internal var mainActivity: MainActivity? = null
+    private var mainActivity: MainActivity? = null
     private lateinit var binding: FragmentConceptBinding
     private var adapter: itemRecylcerAdapter? = null
 
