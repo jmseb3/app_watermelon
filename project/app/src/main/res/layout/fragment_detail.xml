@@ -64,6 +64,7 @@
 
     </RelativeLayout>
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -75,15 +76,120 @@
             android:scaleType="centerCrop"
             android:src="@drawable/main2" />
 
-
         <com.github.chrisbanes.photoview.PhotoView
-
+            android:visibility="visible"
             android:id="@+id/detailimg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#80ffffff">
+            android:background="#80ffffff"/>
 
-        </com.github.chrisbanes.photoview.PhotoView>
+        <RelativeLayout
+            android:id="@+id/check_area"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.github.chrisbanes.photoview.PhotoView
+
+                android:id="@+id/detailcheckimg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/selectnarea"
+                android:background="#75ffffff">
+
+            </com.github.chrisbanes.photoview.PhotoView>
+
+            <LinearLayout
+                android:id="@+id/selectnarea"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_alignParentBottom="true"
+                android:background="#75ffffff">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@drawable/btn_layout2"
+                    android:orientation="vertical"
+                    android:weightSum="9">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/thisfont"
+                        android:gravity="center"
+                        android:text="정답을 골라주세요"
+                        android:textColor="@color/black"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="4"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="8">
+
+
+                        <ImageView
+                            android:id="@+id/ans1img"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            android:padding="10dp"
+                            android:src="@color/black" />
+
+
+                        <ImageView
+                            android:id="@+id/ans2img"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            android:padding="10dp"
+                            android:src="@color/black" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="4"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="8">
+
+
+                        <ImageView
+                            android:id="@+id/ans3img"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            android:padding="10dp"
+                            android:src="@color/black" />
+
+
+                        <ImageView
+                            android:id="@+id/ans4img"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            android:padding="10dp"
+                            android:src="@color/black" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/forward"
@@ -104,6 +210,9 @@
 
 
     </RelativeLayout>
+
+
+
 
 
 </LinearLayout>

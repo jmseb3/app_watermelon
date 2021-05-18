@@ -1,19 +1,24 @@
 package com.math.watermelon
 
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.math.watermelon.databinding.DialogSuccessBinding
 import com.math.watermelon.databinding.FragmentDetailBinding
 import com.math.watermelon.room.AppDatabase
 import com.math.watermelon.room.mathdata
@@ -30,13 +35,14 @@ class DetailFragment : Fragment() {
     lateinit var data: mathdata
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDetailBinding.inflate(inflater, container, false)
-
         val db = AppDatabase.getInstance(requireContext())
+        var check = false
+        binding.checkArea.visibility == View.INVISIBLE
         iddatas.value = iddata
 
         binding.forward.setOnClickListener {
@@ -44,28 +50,56 @@ class DetailFragment : Fragment() {
         }
 
         binding.back.setOnClickListener {
+
             iddatas.value = IdDataChange(idRange(iddata), iddatas.value!!, false)
         }
 
         iddatas.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            Log.d("datas", "" + it)
+            checkVisibility(false)
             GlobalScope.launch(Dispatchers.IO) {
+                check=false
                 data = db.DataDao().getmathdatabyid(it)
+                val src = data.qimgsrc
+                val srcEnd = data.imgsrcend
+                val imgList = arrayListOf<ImageView>(
+                    binding.detailcheckimg,
+                    binding.ans1img,
+                    binding.ans2img,
+                    binding.ans3img,
+                    binding.ans4img
+                )
+
+                val typeList = arrayListOf<String>(
+                    src + "Q" + srcEnd,
+                    src + "A1" + srcEnd,
+                    src + "A2" + srcEnd,
+                    src + "A3" + srcEnd,
+                    src + "A4" + srcEnd
+                )
                 launch(Dispatchers.Main) {
-                    Glide.with(requireActivity())
-                            .load(data.imgsrc + data.imgsrcend)
-                            .placeholder(R.drawable.loading)
-                            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                            .into(binding.detailimg)
+                    Glide.with(mainActivity!!)
+                        .load(data.imgsrc + srcEnd)
+                        .placeholder(R.drawable.loading)
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                        .into(binding.detailimg)
 
                     if (data.favorite != null) {
-                        Glide.with(requireContext())
-                                .load(R.drawable.ic_baseline_favorite_24)
-                                .into(binding.detailfavorite)
+                        Glide.with(mainActivity!!)
+                            .load(R.drawable.ic_baseline_favorite_24)
+                            .into(binding.detailfavorite)
                     } else {
-                        Glide.with(requireContext())
-                                .load(R.drawable.ic_baseline_favorite_border_24)
-                                .into(binding.detailfavorite)
+                        Glide.with(mainActivity!!)
+                            .load(R.drawable.ic_baseline_favorite_border_24)
+                            .into(binding.detailfavorite)
+                    }
+
+                    anscheck(data.ans)
+                    imgList.forEachIndexed { index, imageView ->
+                        Glide.with(mainActivity!!)
+                            .load(typeList[index])
+                            .placeholder(R.drawable.loading)
+                            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                            .into(imageView)
                     }
                 }
             }
@@ -82,16 +116,15 @@ class DetailFragment : Fragment() {
             }
 
         }
+
         binding.detailcheck.setOnClickListener {
-            mainActivity!!.supportFragmentManager
-                    .beginTransaction()
-                    .addToBackStack(null)
-                    .add(R.id.fragcontainer, DetailcheckFragment()
-                            .apply {
-                                arguments = Bundle().apply {
-                                    putInt("id", iddatas.value!!)
-                                }
-                            }).commit()
+            if (!check) {
+                check = true
+                checkVisibility(check)
+            } else {
+                check = false
+                checkVisibility(check)
+            }
 
         }
 
@@ -105,10 +138,11 @@ class DetailFragment : Fragment() {
                             db.DataDao().changefavorite(data.id!!, null)
                         }
                         Glide.with(requireContext())
-                                .load(R.drawable.ic_baseline_favorite_border_24)
-                                .into(binding.detailfavorite)
+                            .load(R.drawable.ic_baseline_favorite_border_24)
+                            .into(binding.detailfavorite)
 
-                        Toast.makeText(requireContext(), "즐겨찾기가 제거되었습니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "즐겨찾기가 제거되었습니다.", Toast.LENGTH_SHORT)
+                            .show()
                     } else {
                         val edittextbox = EditText(mainActivity)
                         val builder: AlertDialog.Builder = AlertDialog.Builder(mainActivity!!)
@@ -122,21 +156,22 @@ class DetailFragment : Fragment() {
                             }
                         }
                         builder.setPositiveButton(
-                                "입력"
+                            "입력"
                         ) { _, _ ->
                             //제목 입력, DB추가
                             if (edittextbox.text.toString().isNotEmpty()) {
                                 GlobalScope.launch() {
                                     db.DataDao().changefavorite(iddata, edittextbox.text.toString())
                                 }
-                                Toast.makeText(mainActivity, "즐겨찾기에 추가되었습니다.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(mainActivity, "즐겨찾기에 추가되었습니다.", Toast.LENGTH_SHORT)
+                                    .show()
                             }
                             Glide.with(requireContext())
-                                    .load(R.drawable.ic_baseline_favorite_24)
-                                    .into(binding.detailfavorite)
+                                .load(R.drawable.ic_baseline_favorite_24)
+                                .into(binding.detailfavorite)
                         }
                         builder.setNegativeButton(
-                                "취소"
+                            "취소"
                         ) { _, _ ->
                             //취소
                         }
@@ -147,12 +182,6 @@ class DetailFragment : Fragment() {
                 }
             }
         }
-
-
-
-
-
-
 
         return binding.root
     }
@@ -166,6 +195,39 @@ class DetailFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         mainActivity = null
+    }
+
+    fun checkVisibility(value: Boolean) {
+        if (value) {
+            binding.checkArea.visibility = View.VISIBLE
+            binding.detailimg.visibility = View.INVISIBLE
+        } else {
+            binding.checkArea.visibility = View.INVISIBLE
+            binding.detailimg.visibility = View.VISIBLE
+        }
+    }
+
+    private fun anscheck(ans: Int) {
+        val dialog = makeDialog(mainActivity!!)
+        val imgList = arrayListOf<ImageView>(
+            binding.ans1img,
+            binding.ans2img,
+            binding.ans3img,
+            binding.ans4img
+        )
+        imgList.forEachIndexed { index, imageView ->
+            if (index + 1 == ans) {
+                imageView.setOnClickListener {
+                    dialog.show(true)
+                }
+            } else {
+                imageView.setOnClickListener {
+                    dialog.show(false)
+                }
+            }
+        }
+
+
     }
 
     fun idRange(id: Int): Int {
@@ -185,6 +247,7 @@ class DetailFragment : Fragment() {
             else -> 0
         }
     }
+
     fun valueNofiy(first: Int, end: Int, value: Int, plus: Boolean): Int {
         return if (plus) {
             if (value == end) {
@@ -202,6 +265,7 @@ class DetailFragment : Fragment() {
             }
         }
     }
+
     fun IdDataChange(type: Int, value: Int, plus: Boolean): Int {
         when (type) {
             1 -> {
@@ -223,4 +287,49 @@ class DetailFragment : Fragment() {
     }
 }
 
+class makeDialog(context: Context) {
+    private val dialog = Dialog(context)
+    private val successSnd = MediaPlayer.create(context, R.raw.success)
+    private val failSnd = MediaPlayer.create(context, R.raw.fail)
+    private val context = context
+    private var dialogBinding: DialogSuccessBinding =
+        DialogSuccessBinding.inflate(LayoutInflater.from(context))
+
+    fun show(type: Boolean) {
+        dialog.setContentView(dialogBinding.root)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCanceledOnTouchOutside(true)
+        dialogBinding.main.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialogBinding.icon.setOnClickListener {
+            dialog.dismiss()
+        }
+        setImg(type)
+        dialog.show()
+    }
+
+    private fun setImg(type: Boolean) {
+        Glide.with(context)
+            .load(R.drawable.main)
+            .circleCrop()
+            .into(dialogBinding.main)
+        if (type) {
+            Glide.with(context)
+                .load(R.drawable.success2)
+                .circleCrop()
+                .into(dialogBinding.icon)
+            successSnd.start()
+
+        } else {
+            Glide.with(context)
+                .load(R.drawable.fail2)
+                .circleCrop()
+                .into(dialogBinding.icon)
+            failSnd.start()
+        }
+    }
+
+
+}
 

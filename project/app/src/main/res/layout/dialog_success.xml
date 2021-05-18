@@ -1,21 +1,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="322dp"
     android:layout_height="322dp"
+    android:layout_gravity="center"
     android:background="@drawable/dialog_type"
     android:orientation="vertical">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/main2" />
 
     <ImageView
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="center"
-        android:src="@drawable/success2" />
-
-
+        android:src="@drawable/main"></ImageView>
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dialog_type"
+        android:src="@drawable/fail2"/>
 
 
 </RelativeLayout>
