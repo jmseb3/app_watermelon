@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".HasulFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/wood" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/hasul_back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:src="@drawable/backbtn" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/hasuk_home"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_home"
+                android:gravity="center_vertical" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        // 메인이미지
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/main2" />
+        <TextView
+            android:id="@+id/info_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/btn_layout3"
+            android:fontFamily="@font/thisfont"
+            android:gravity="center"
+            android:padding="4dp"
+            android:textColor="@color/black"
+            android:text="문제"
+            android:textSize="23sp" />
+
+        <LinearLayout
+            android:id="@+id/info_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/info_text"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/btn_layout3"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/thisfont"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:text="관련개념 :"
+                android:textSize="18sp"></TextView>
+
+            <TextView
+                android:id="@+id/go_concept"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/thisfont"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:text="~~~! ~~번"
+                android:textSize="18sp"></TextView>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:scrollbars="none"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:layout_height="match_parent"
+            android:background="#80ffffff"
+            android:layout_below="@id/info_box"
+          >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.github.chrisbanes.photoview.PhotoView
+                    android:id="@+id/img_Q"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/colorPrimary"
+                    android:fontFamily="@font/thisfont"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:text="해설"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <com.github.chrisbanes.photoview.PhotoView
+                    android:id="@+id/img_Sol"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

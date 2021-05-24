@@ -29,9 +29,9 @@ class FavoriteFragment : Fragment() {
     ): View? {
         binding = FragmentFavoriteBinding.inflate(inflater, container, false)
 
-        val db = AppDatabase.getInstance(requireContext())
+        val db = AppDatabase.getInstance(mainActivity!!)
 
-        val manager = ReviewManagerFactory.create(requireContext())
+        val manager = ReviewManagerFactory.create(mainActivity!!)
         val request = manager.requestReviewFlow()
         val divider_Vertical = DividerItemDecoration(mainActivity!!, LinearLayoutManager.VERTICAL)
         divider_Vertical.setDrawable(mainActivity!!.resources.getDrawable(R.drawable.divider_vertical,null))

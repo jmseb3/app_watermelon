@@ -8,20 +8,23 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 
-@Database(entities = [mathdata::class], version = 1,exportSchema = false)
+@Database(entities = [mathdata::class,college::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun DataDao(): DataDao
 
-    companion object{
+
+    companion object {
+
         private var INSTANCE: AppDatabase? = null
         fun getInstance(context: Context): AppDatabase {
-            if (INSTANCE == null){
+            if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(
-                    context,
-                    AppDatabase::class.java,
-                    "watermelondata.db")
+                        context,
+                        AppDatabase::class.java,
+                        "watermelondata.db"
+                ).fallbackToDestructiveMigration()
                         .createFromAsset("mathdata.db")
-                    .build()
+                        .build()
             }
             return INSTANCE as AppDatabase
         }

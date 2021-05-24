@@ -15,8 +15,15 @@ android {
         applicationId "com.math.watermelon"
         minSdkVersion 24
         targetSdkVersion 30
-        versionCode 11
-        versionName "3.2"
+        versionCode 14
+        versionName "3.5"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation":
+                                      "$projectDir/schemas".toString()]
+            }
+        }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

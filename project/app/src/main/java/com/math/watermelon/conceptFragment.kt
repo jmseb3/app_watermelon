@@ -24,7 +24,6 @@ class conceptFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentConceptBinding.inflate(inflater, container, false)
-        val db = AppDatabase.getInstance(requireContext())
 
         binding.btnmath1.setOnClickListener {
             change("수학1")
@@ -50,7 +49,7 @@ class conceptFragment : Fragment() {
             }
         }
 
-        binding.searchtext.setOnEditorActionListener { textView, i, keyEvent ->
+        binding.searchtext.setOnEditorActionListener { _, i, _ ->
             if (i == EditorInfo.IME_ACTION_SEARCH) {
                 parentFragmentManager
                     .beginTransaction()

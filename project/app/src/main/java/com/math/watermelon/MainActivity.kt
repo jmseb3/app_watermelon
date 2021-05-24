@@ -32,8 +32,7 @@ class MainActivity : AppCompatActivity() {
     private var backKeyPressedTime: Long = 0
 
     private lateinit var binding: ActivityMainBinding
-    lateinit var mBottomNavigationView: BottomNavigationView
-
+    private lateinit var mBottomNavigationView: BottomNavigationView
     private lateinit var appUpdateManager: AppUpdateManager
 
 
@@ -41,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         mBottomNavigationView = findViewById(R.id.bottom_navigation)
 
