@@ -41,6 +41,16 @@ class etcFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.email.setOnClickListener {
+            val email = Intent(Intent.ACTION_SEND)
+            email.type = "plain/text"
+            val address = arrayOf<String>("jmseb2@gmail.com")
+            email.putExtra(Intent.EXTRA_EMAIL, address)
+            email.putExtra(Intent.EXTRA_SUBJECT, "<MT매니저 관련 문의입니다.>")
+            email.putExtra(Intent.EXTRA_TEXT, "내용:")
+            startActivity(email)
+        }
+
 
         return binding.root
     }

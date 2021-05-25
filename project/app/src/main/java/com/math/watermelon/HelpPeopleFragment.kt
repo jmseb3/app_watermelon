@@ -36,6 +36,13 @@ class HelpPeopleFragment : Fragment() {
             startActivity(webIntent)
         }
 
+        binding.helpPersonbtn2.setOnClickListener {
+            val webIntent: Intent = Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://www.kice.re.kr/")
+            )
+            startActivity(webIntent)
+        }
+
         return binding.root
     }
     override fun onAttach(context: Context) {

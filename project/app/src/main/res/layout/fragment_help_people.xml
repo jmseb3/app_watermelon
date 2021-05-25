@@ -70,53 +70,120 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:weightSum="5">
 
                 <LinearLayout
-                    android:layout_margin="8dp"
-                    android:padding="10dp"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:background="@drawable/btn_layout"
-                    android:layout_weight="4"
-                    android:weightSum="3">
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+                    <LinearLayout
+                        android:layout_margin="8dp"
+                        android:padding="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@drawable/btn_layout"
+                        android:layout_weight="4"
+                        android:weightSum="3">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="2"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/thisfont"
+                            android:gravity="center"
+                            android:text="도곡동 막쌤 블로그"
+                            android:textColor="@color/black"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_marginTop="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/thisfont"
+                            android:gravity="center"
+                            android:text="시원한 개념정리 자료제공"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/helpPersonbtn1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_layout"
                         android:fontFamily="@font/thisfont"
                         android:gravity="center"
-                        android:text="도곡동 막쌤 블로그"
+                        android:text="이동"
                         android:textColor="@color/black"
                         android:textSize="25sp" />
 
-                    <TextView
-                        android:layout_marginTop="5dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+                    <LinearLayout
+                        android:layout_margin="8dp"
+                        android:padding="10dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@drawable/btn_layout"
+                        android:layout_weight="4"
+                        android:weightSum="3">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/thisfont"
+                            android:gravity="center"
+                            android:text="한국 교육과정 평가원"
+                            android:textColor="@color/black"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_marginTop="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/thisfont"
+                            android:gravity="center"
+                            android:text="시원한 수능정리 자료제공"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/helpPersonbtn2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
                         android:layout_weight="1"
+                        android:background="@drawable/btn_layout"
                         android:fontFamily="@font/thisfont"
                         android:gravity="center"
-                        android:text="시원한 개념정리 자료제공"
-                        android:layout_marginBottom="5dp"
+                        android:text="이동"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="25sp" />
+
+
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/helpPersonbtn1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_layout"
-                    android:fontFamily="@font/thisfont"
-                    android:gravity="center"
-                    android:text="이동"
-                    android:textColor="@color/black"
-                    android:textSize="25sp" />
+
+
 
             </LinearLayout>
 

@@ -43,6 +43,14 @@ class HasulFragment : Fragment() {
                 binding.infoText.text = data.year + data.qnumber
                 binding.goConcept.text = concept.concept +"-"+ concept.topic
 
+                binding.hasulBox.setOnClickListener{
+                    if (binding.imgSol.visibility == View.INVISIBLE){
+                        binding.imgSol.visibility = View.VISIBLE
+                    } else {
+                        binding.imgSol.visibility = View.INVISIBLE
+                    }
+                }
+
                 binding.infoBox.setOnClickListener {
                     parentFragmentManager.beginTransaction()
                             .addToBackStack(null)
