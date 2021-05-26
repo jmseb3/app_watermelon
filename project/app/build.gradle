@@ -15,8 +15,8 @@ android {
         applicationId "com.math.watermelon"
         minSdkVersion 24
         targetSdkVersion 30
-        versionCode 15
-        versionName "3.6"
+        versionCode 16
+        versionName "4.0"
 
         javaCompileOptions {
             annotationProcessorOptions {

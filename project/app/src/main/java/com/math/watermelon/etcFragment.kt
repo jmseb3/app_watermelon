@@ -46,7 +46,7 @@ class etcFragment : Fragment() {
             email.type = "plain/text"
             val address = arrayOf<String>("jmseb2@gmail.com")
             email.putExtra(Intent.EXTRA_EMAIL, address)
-            email.putExtra(Intent.EXTRA_SUBJECT, "<MT매니저 관련 문의입니다.>")
+            email.putExtra(Intent.EXTRA_SUBJECT, "<시원한 수학박사 관련 문의입니다.>")
             email.putExtra(Intent.EXTRA_TEXT, "내용:")
             startActivity(email)
         }
