@@ -85,3 +85,5 @@ lint/tmp/
 # lint/reports/
 
 이미지데이터/
+
+/app/build/
