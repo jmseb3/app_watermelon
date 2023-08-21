@@ -5,6 +5,8 @@ plugins {
     id 'kotlin-kapt'
 }
 
+apply from : "../keystore/signing.gradle"
+
 android {
     compileSdk 33
 
@@ -33,6 +35,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.mathSigning
         }
     }
     compileOptions {
