@@ -14,7 +14,7 @@ android {
         applicationId = "com.math.watermelon"
         minSdk = 24
         targetSdk = 37
-        versionCode = 19
+        versionCode = 20
         versionName = "4.3.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -26,7 +26,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig = signingConfigs.mathSigning
         }
