@@ -3,6 +3,7 @@ package com.math.watermelon
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +13,8 @@ import com.math.watermelon.databinding.FragmentFavoriteBinding
 import com.math.watermelon.databinding.FragmentTestBinding
 import com.math.watermelon.room.AppDatabase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class TestFragment : Fragment() {
 
@@ -35,15 +36,13 @@ class TestFragment : Fragment() {
         divider_VERTICAL.setDrawable(mainActivity!!.resources.getDrawable(R.drawable.divider_vertical,null))
         divider_HORIZONTAL.setDrawable(mainActivity!!.resources.getDrawable(R.drawable.divider_vertical,null))
 
-        GlobalScope.launch(Dispatchers.IO) {
-            var list =db.DataDao().getCollegeqnumber()
+        viewLifecycleOwner.lifecycleScope.launch {
+            val list = withContext(Dispatchers.IO) { db.DataDao().getCollegeqnumber() }
             adapter = TestRecylcerAdapter(list,parentFragmentManager,mainActivity!!)
-            launch(Dispatchers.Main) {
-                binding.testRecycle.addItemDecoration(divider_VERTICAL)
-                binding.testRecycle.addItemDecoration(divider_HORIZONTAL)
-                binding.testRecycle.layoutManager = layoutManager
-                binding.testRecycle.adapter = adapter
-            }
+            binding.testRecycle.addItemDecoration(divider_VERTICAL)
+            binding.testRecycle.addItemDecoration(divider_HORIZONTAL)
+            binding.testRecycle.layoutManager = layoutManager
+            binding.testRecycle.adapter = adapter
         }
 
 

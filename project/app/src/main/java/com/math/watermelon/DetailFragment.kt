@@ -15,6 +15,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -23,8 +24,8 @@ import com.math.watermelon.databinding.FragmentDetailBinding
 import com.math.watermelon.room.AppDatabase
 import com.math.watermelon.room.mathdata
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DetailFragment : Fragment() {
 
@@ -56,9 +57,9 @@ class DetailFragment : Fragment() {
 
         iddatas.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             checkVisibility(false)
-            GlobalScope.launch(Dispatchers.IO) {
-                check=false
-                data = db.DataDao().getmathdatabyid(it)
+            viewLifecycleOwner.lifecycleScope.launch {
+                check = false
+                data = withContext(Dispatchers.IO) { db.DataDao().getmathdatabyid(it) }
                 val src = data.qimgsrc
                 val srcEnd = data.imgsrcend
                 val imgList = arrayListOf<ImageView>(
@@ -76,31 +77,29 @@ class DetailFragment : Fragment() {
                     src + "A3" + srcEnd,
                     src + "A4" + srcEnd
                 )
-                launch(Dispatchers.Main) {
+                Glide.with(mainActivity!!)
+                    .load(data.imgsrc + srcEnd)
+                    .placeholder(R.drawable.loading)
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .into(binding.detailimg)
+
+                if (data.favorite != null) {
                     Glide.with(mainActivity!!)
-                        .load(data.imgsrc + srcEnd)
+                        .load(R.drawable.ic_baseline_favorite_24)
+                        .into(binding.detailfavorite)
+                } else {
+                    Glide.with(mainActivity!!)
+                        .load(R.drawable.ic_baseline_favorite_border_24)
+                        .into(binding.detailfavorite)
+                }
+
+                anscheck(data.ans)
+                imgList.forEachIndexed { index, imageView ->
+                    Glide.with(mainActivity!!)
+                        .load(typeList[index])
                         .placeholder(R.drawable.loading)
                         .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                        .into(binding.detailimg)
-
-                    if (data.favorite != null) {
-                        Glide.with(mainActivity!!)
-                            .load(R.drawable.ic_baseline_favorite_24)
-                            .into(binding.detailfavorite)
-                    } else {
-                        Glide.with(mainActivity!!)
-                            .load(R.drawable.ic_baseline_favorite_border_24)
-                            .into(binding.detailfavorite)
-                    }
-
-                    anscheck(data.ans)
-                    imgList.forEachIndexed { index, imageView ->
-                        Glide.with(mainActivity!!)
-                            .load(typeList[index])
-                            .placeholder(R.drawable.loading)
-                            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                            .into(imageView)
-                    }
+                        .into(imageView)
                 }
             }
         })
@@ -130,55 +129,39 @@ class DetailFragment : Fragment() {
 
 
         binding.detailfavorite.setOnClickListener {
-            GlobalScope.launch(Dispatchers.IO) {
-                data = db.DataDao().getmathdatabyid(iddata)
-                launch(Dispatchers.Main) {
-                    if (data.favorite != null) {
-                        launch(Dispatchers.IO) {
-                            db.DataDao().changefavorite(data.id!!, null)
+            viewLifecycleOwner.lifecycleScope.launch {
+                data = withContext(Dispatchers.IO) { db.DataDao().getmathdatabyid(iddata) }
+                if (data.favorite != null) {
+                    withContext(Dispatchers.IO) {
+                        db.DataDao().changefavorite(data.id!!, null)
+                    }
+                    Glide.with(requireContext())
+                        .load(R.drawable.ic_baseline_favorite_border_24)
+                        .into(binding.detailfavorite)
+
+                    Toast.makeText(requireContext(), "즐겨찾기가 제거되었습니다.", Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    val edittextbox = EditText(mainActivity)
+                    val builder: AlertDialog.Builder = AlertDialog.Builder(mainActivity!!)
+                    builder.setTitle("즐겨찾기 추가")
+                    builder.setMessage("즐겨찾기 제목을 지정해주세요.")
+                    builder.setView(edittextbox)
+                    edittextbox.setText(data.topic)
+                    builder.setPositiveButton("입력") { _, _ ->
+                        if (edittextbox.text.toString().isNotEmpty()) {
+                            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                                db.DataDao().changefavorite(iddata, edittextbox.text.toString())
+                            }
+                            Toast.makeText(mainActivity, "즐겨찾기에 추가되었습니다.", Toast.LENGTH_SHORT)
+                                .show()
                         }
                         Glide.with(requireContext())
-                            .load(R.drawable.ic_baseline_favorite_border_24)
+                            .load(R.drawable.ic_baseline_favorite_24)
                             .into(binding.detailfavorite)
-
-                        Toast.makeText(requireContext(), "즐겨찾기가 제거되었습니다.", Toast.LENGTH_SHORT)
-                            .show()
-                    } else {
-                        val edittextbox = EditText(mainActivity)
-                        val builder: AlertDialog.Builder = AlertDialog.Builder(mainActivity!!)
-                        builder.setTitle("즐겨찾기 추가")
-                        builder.setMessage("즐겨찾기 제목을 지정해주세요.")
-                        builder.setView(edittextbox)
-                        GlobalScope.launch(Dispatchers.IO) {
-                            data = db.DataDao().getmathdatabyid(iddata)
-                            GlobalScope.launch(Dispatchers.Main) {
-                                edittextbox.setText(data.topic)
-                            }
-                        }
-                        builder.setPositiveButton(
-                            "입력"
-                        ) { _, _ ->
-                            //제목 입력, DB추가
-                            if (edittextbox.text.toString().isNotEmpty()) {
-                                GlobalScope.launch() {
-                                    db.DataDao().changefavorite(iddata, edittextbox.text.toString())
-                                }
-                                Toast.makeText(mainActivity, "즐겨찾기에 추가되었습니다.", Toast.LENGTH_SHORT)
-                                    .show()
-                            }
-                            Glide.with(requireContext())
-                                .load(R.drawable.ic_baseline_favorite_24)
-                                .into(binding.detailfavorite)
-                        }
-                        builder.setNegativeButton(
-                            "취소"
-                        ) { _, _ ->
-                            //취소
-                        }
-                        builder.show()
-
-
                     }
+                    builder.setNegativeButton("취소") { _, _ -> }
+                    builder.show()
                 }
             }
         }
@@ -332,4 +315,3 @@ class makeDialog(context: Context) {
 
 
 }
-

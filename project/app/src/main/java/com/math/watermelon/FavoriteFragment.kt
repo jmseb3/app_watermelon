@@ -3,6 +3,7 @@ package com.math.watermelon
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,7 +67,7 @@ class FavoriteFragment : Fragment() {
                     viewList[index].addItemDecoration(divider_Vertical)
                     checkList[index] = true
 
-                    adapterList[index] = favoriteitemRecylcerAdapter(it, parentFragmentManager, requireContext(), conceptList[index])
+                    adapterList[index] = favoriteitemRecylcerAdapter(it, parentFragmentManager, requireContext(), conceptList[index], viewLifecycleOwner.lifecycleScope)
                     viewList[index].adapter = adapterList[index]
                 }
 
@@ -97,6 +98,5 @@ class FavoriteFragment : Fragment() {
     }
 
 }
-
 
 

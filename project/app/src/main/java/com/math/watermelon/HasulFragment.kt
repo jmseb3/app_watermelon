@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +13,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.math.watermelon.databinding.FragmentHasulBinding
 import com.math.watermelon.room.AppDatabase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HasulFragment : Fragment() {
     private var mainActivity: MainActivity? = null
@@ -35,10 +36,9 @@ class HasulFragment : Fragment() {
             }
         }
         binding.infoText.text = hasulId.toString()
-        GlobalScope.launch(Dispatchers.IO) {
-            var data = db.DataDao().getCollegeDataById(hasulId)
-            var concept = db.DataDao().getmathdatabyid(data.conceptid)
-            launch(Dispatchers.Main) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val data = withContext(Dispatchers.IO) { db.DataDao().getCollegeDataById(hasulId) }
+            val concept = withContext(Dispatchers.IO) { db.DataDao().getmathdatabyid(data.conceptid) }
 
                 binding.infoText.text = data.year + data.qnumber
                 binding.goConcept.text = concept.concept +"-"+ concept.topic
@@ -72,8 +72,6 @@ class HasulFragment : Fragment() {
                         .placeholder(R.drawable.loading)
                         .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                         .into(binding.imgSol)
-            }
-
         }
 
         return binding.root

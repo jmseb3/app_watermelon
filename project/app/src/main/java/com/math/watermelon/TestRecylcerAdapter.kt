@@ -43,9 +43,7 @@ class TestRecylcerAdapter(
 
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        if (holder is ItemViewHolder) {
-            holder.item.text = itemlist[position]
-        }
+        holder.item.text = itemlist[position]
 
     }
 
