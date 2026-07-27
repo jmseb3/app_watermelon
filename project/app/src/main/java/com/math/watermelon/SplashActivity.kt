@@ -19,7 +19,7 @@ import com.math.watermelon.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
 
-    private val SPLASH_TIME_OUT: Long = 3000 // 1 sec
+    private val SPLASH_TIME_OUT: Long = 1_500L
     val binding by lazy { ActivitySplashBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {

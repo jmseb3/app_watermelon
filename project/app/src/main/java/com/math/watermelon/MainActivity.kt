@@ -63,8 +63,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, windowInsets ->
             val systemBars = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-            binding.fragcontainer.updatePadding(top = systemBars.top)
-            binding.bottomNavigation.updatePadding(bottom = systemBars.bottom)
+            binding.root.updatePadding(top = systemBars.top, bottom = systemBars.bottom)
             windowInsets
         }
         ViewCompat.requestApplyInsets(binding.root)
