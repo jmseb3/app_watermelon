@@ -2,6 +2,7 @@ package com.math.watermelon
 
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -9,8 +10,12 @@ import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.room.Room
 
@@ -50,8 +55,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            window.isNavigationBarContrastEnforced = false
+        }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, windowInsets ->
+            val systemBars = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            binding.fragcontainer.updatePadding(top = systemBars.top)
+            binding.bottomNavigation.updatePadding(bottom = systemBars.bottom)
+            windowInsets
+        }
+        ViewCompat.requestApplyInsets(binding.root)
 
         mBottomNavigationView = findViewById(R.id.bottom_navigation)
 
@@ -158,7 +174,6 @@ class MainActivity : AppCompatActivity() {
 
 
 }
-
 
 
 
