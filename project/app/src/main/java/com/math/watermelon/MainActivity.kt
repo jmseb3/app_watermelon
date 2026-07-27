@@ -2,13 +2,14 @@ package com.math.watermelon
 
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.room.Room
@@ -17,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.math.watermelon.databinding.ActivityMainBinding
@@ -34,6 +36,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mBottomNavigationView: BottomNavigationView
     private lateinit var appUpdateManager: AppUpdateManager
+    private val appUpdateLauncher = registerForActivityResult(
+        ActivityResultContracts.StartIntentSenderForResult()
+    ) { result ->
+        if (result.resultCode != RESULT_OK) {
+            MaterialAlertDialogBuilder(this)
+                .setPositiveButton("ok") { _, _ -> }
+                .setMessage("업데이트가 취소되었습니다.")
+                .show()
+        }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +56,11 @@ class MainActivity : AppCompatActivity() {
         mBottomNavigationView = findViewById(R.id.bottom_navigation)
 
         initNavigationBar()
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                handleBackPressed()
+            }
+        })
 
         appUpdateManager = AppUpdateManagerFactory.create(this)
 
@@ -55,9 +72,8 @@ class MainActivity : AppCompatActivity() {
             ) {
                 appUpdateManager.startUpdateFlowForResult(
                     appUpdateInfo,
-                    AppUpdateType.FLEXIBLE,
-                    this,
-                    700
+                    appUpdateLauncher,
+                    AppUpdateOptions.newBuilder(AppUpdateType.FLEXIBLE).build()
                 )
             }
         }
@@ -70,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         imm.hideSoftInputFromWindow(editText.windowToken, 0)
     }
 
-    override fun onBackPressed() {
+    private fun handleBackPressed() {
         if (supportFragmentManager.backStackEntryCount == 0) {
             if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
                 backKeyPressedTime = System.currentTimeMillis();
@@ -98,34 +114,17 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     appUpdateManager.startUpdateFlowForResult(
                         appUpdateInfo,
-                        AppUpdateType.IMMEDIATE,
-                        this,
-                        700
+                        appUpdateLauncher,
+                        AppUpdateOptions.newBuilder(AppUpdateType.IMMEDIATE).build()
                     )
 
                 }
             }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == 700) {
-            if (resultCode != RESULT_OK) {
-
-            }else{
-                MaterialAlertDialogBuilder(this)
-                        .setPositiveButton("ok") { _, _ ->
-                        }
-                        .setMessage("업데이트가 취소되었습니다.")
-                        .show()
-            }
-        }
-    }
-
     private fun initNavigationBar() {
         mBottomNavigationView.run {
-            setOnNavigationItemSelectedListener {
+            setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.nav_concept -> {
                         changeFragment(fragmentOne)
@@ -159,8 +158,6 @@ class MainActivity : AppCompatActivity() {
 
 
 }
-
-
 
 
 

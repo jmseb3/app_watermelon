@@ -8,27 +8,27 @@ apply from : "../keystore/signing.gradle"
 
 android {
     namespace = "com.math.watermelon"
-    compileSdk 37
+    compileSdk =  37
 
     defaultConfig {
-        applicationId "com.math.watermelon"
-        minSdkVersion 24
-        targetSdk 37
-        versionCode 18
-        versionName "4.2.0"
+        applicationId = "com.math.watermelon"
+        minSdk = 24
+        targetSdk = 37
+        versionCode = 18
+        versionName = "4.2.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildFeatures {
-        viewBinding true
+        viewBinding = true
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.mathSigning
+            signingConfig = signingConfigs.mathSigning
         }
     }
     compileOptions {
